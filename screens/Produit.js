@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text } from "react-native";
 
-const ProduitScreen = () => {
+const Produit = () => {
   return (
     <View>
       <Text>Produit Screen</Text>
@@ -9,4 +9,4 @@ const ProduitScreen = () => {
   );
 };
 
-export default ProduitScreen;
+export default Produit;

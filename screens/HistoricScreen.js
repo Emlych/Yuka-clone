@@ -6,29 +6,43 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
-import Item from "../components/Item";
+import Produit from "./Produit";
 
 //Navigation
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-const HistoricScreen = ({ navigation }) => {
-  const HistoricStack = createNativeStackNavigator();
-
+function Historic({ navigation }) {
   return (
-    // <HistoricStack.Navigator>
-    //   <HistoricStack.Screen name=
-    // </HistoricStack.Navigator>
-    <View style={styles.item}>
-      <Text>Historic Screen</Text>
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <ScrollView>
         <TouchableOpacity onPress={() => navigation.navigate("Produit")}>
-          <Item />
+          <Produit />
         </TouchableOpacity>
-
-        <Item />
-        <Item />
+        <TouchableOpacity onPress={() => navigation.navigate("Produit")}>
+          <Produit />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate("Produit")}>
+          <Produit />
+        </TouchableOpacity>
       </ScrollView>
     </View>
+  );
+}
+
+const HistoricStackScreen = () => {
+  const Stack = createNativeStackNavigator();
+
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Historique" component={Historic} />
+      <Stack.Screen name="Produit" component={Produit} />
+    </Stack.Navigator>
   );
 };
 
@@ -36,4 +50,4 @@ const styles = StyleSheet.create({
   item: { flex: 1 },
 });
 
-export default HistoricScreen;
+export default HistoricStackScreen;

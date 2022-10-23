@@ -6,10 +6,6 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
-//import Produit from "./Produit";
-
-//Navigation
-//import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 const HistoricScreen = ({ navigation }) => {
   return (
@@ -35,17 +31,6 @@ const HistoricScreen = ({ navigation }) => {
     </View>
   );
 };
-
-// const HistoricStackScreen = () => {
-//   const Stack = createNativeStackNavigator();
-
-//   return (
-//     <Stack.Navigator>
-//       <Stack.Screen name="Historique" component={Historic} />
-//       <Stack.Screen name="Produit" component={Produit} />
-//     </Stack.Navigator>
-//   );
-// };
 
 const styles = StyleSheet.create({
   item: { flex: 1 },

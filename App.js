@@ -7,7 +7,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 //Screens
-import HistoricScreen from "./screens/HistoricScreen";
+import HistoricStackScreen from "./screens/HistoricStackScreen";
 import RecoScreen from "./screens/RecoScreen";
 import ScanScreen from "./screens/ScanScreen";
 import SyntheseScreen from "./screens/SyntheseScreen";
@@ -26,96 +26,78 @@ export default function App() {
   return (
     <NavigationContainer>
       <StatusBar></StatusBar>
-      <Stack.Navigator>
-        <Stack.Screen name="Tab">
-          {() => {
-            <Tab.Navigator screenOptions={{ screenOptions }}>
-              {/* ----------------------------------------------------- */}
-              {/* Historic Tab ---------------------------------------- */}
-              <Tab.Screen
-                name="TabHistoric"
-                options={{
-                  tabBarLabel: "Historique",
-                  tabBarIcon: ({ color, size }) => (
-                    <FontAwesome5 name="carrot" size={24} color={color} />
-                  ),
-                }}
-              >
-                {(props) => (
-                  <Stack.Navigator>
-                    <Stack.Screen name="Historique">
-                      {() => <HistoricScreen {...props} />}
-                    </Stack.Screen>
-                    <Stack.Screen name="Produit">
-                      {() => <Produit {...props} />}
-                    </Stack.Screen>
-                  </Stack.Navigator>
-                )}
-              </Tab.Screen>
 
-              {/* ------------------------------------------------------------ */}
-              {/* Recommendations Tab ---------------------------------------- */}
-              <Tab.Screen
-                options={{
-                  tabBarIcon: ({ color, size }) => (
-                    <MaterialCommunityIcons
-                      name="swap-horizontal-circle-outline"
-                      size={24}
-                      color={color}
-                    />
-                  ),
-                }}
-                name="Recos"
-                component={RecoScreen}
-              />
-
-              {/* ------------------------------------------------- */}
-              {/* Scan Tab ---------------------------------------- */}
-              <Tab.Screen
-                options={{
-                  tabBarLabel: "Scan",
-                  tabBarIcon: ({ color, size }) => (
-                    <MaterialCommunityIcons
-                      name="barcode-scan"
-                      size={24}
-                      color={color}
-                    />
-                  ),
-                }}
-                name="Scan"
-                component={ScanScreen}
-              >
-                {(props) => (
-                  <Stack.Navigator>
-                    <Stack.Screen name="Scan">
-                      {() => <ScanScreen {...props} />}
-                    </Stack.Screen>
-                    <Stack.Screen name="Produit">
-                      {() => <Produit {...props} />}
-                    </Stack.Screen>
-                  </Stack.Navigator>
-                )}
-              </Tab.Screen>
-
-              {/* ------------------------------------------------- */}
-              {/* Scan Tab ---------------------------------------- */}
-              <Tab.Screen
-                options={{
-                  tabBarIcon: ({ color, size }) => (
-                    <Ionicons
-                      name="ios-pie-chart-outline"
-                      size={24}
-                      color={color}
-                    />
-                  ),
-                }}
-                name="Synthèse"
-                component={SyntheseScreen}
-              />
-            </Tab.Navigator>;
+      <Tab.Navigator screenOptions={{ screenOptions }}>
+        {/* ----------------------------------------------------- */}
+        {/* Historic Tab ---------------------------------------- */}
+        <Tab.Screen
+          name="TabHistoric"
+          component={HistoricStackScreen}
+          options={{
+            tabBarLabel: "Historique",
+            tabBarIcon: ({ color, size }) => (
+              <FontAwesome5 name="carrot" size={24} color={color} />
+            ),
           }}
-        </Stack.Screen>
-      </Stack.Navigator>
+        />
+
+        {/* ------------------------------------------------------------ */}
+        {/* Recommendations Tab ---------------------------------------- */}
+        <Tab.Screen
+          name="Recos"
+          component={RecoScreen}
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons
+                name="swap-horizontal-circle-outline"
+                size={24}
+                color={color}
+              />
+            ),
+          }}
+        />
+
+        {/* ------------------------------------------------- */}
+        {/* Scan Tab ---------------------------------------- */}
+        <Tab.Screen
+          name="Scan"
+          component={ScanScreen}
+          options={{
+            tabBarLabel: "Scan",
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons
+                name="barcode-scan"
+                size={24}
+                color={color}
+              />
+            ),
+          }}
+        />
+        {/* 
+          {(props) => (
+            <Stack.Navigator>
+              <Stack.Screen name="Scan">
+                {() => <ScanScreen {...props} />}
+              </Stack.Screen>
+              <Stack.Screen name="Produit">
+                {() => <Produit {...props} />}
+              </Stack.Screen>
+            </Stack.Navigator>
+          )}
+        </Tab.Screen> */}
+
+        {/* ------------------------------------------------- */}
+        {/* Synthèse Tab ---------------------------------------- */}
+        <Tab.Screen
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="ios-pie-chart-outline" size={24} color={color} />
+            ),
+          }}
+          name="Synthèse"
+          component={SyntheseScreen}
+        />
+      </Tab.Navigator>
     </NavigationContainer>
   );
 }

@@ -6,12 +6,12 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
-import Produit from "./Produit";
+//import Produit from "./Produit";
 
 //Navigation
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+//import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-function Historic({ navigation }) {
+const HistoricScreen = ({ navigation }) => {
   return (
     <View
       style={{
@@ -21,6 +21,7 @@ function Historic({ navigation }) {
       }}
     >
       <ScrollView>
+        <Text>Blablab</Text>
         {/* <TouchableOpacity onPress={() => navigation.navigate("Produit")}>
           <Produit />
         </TouchableOpacity>
@@ -33,21 +34,21 @@ function Historic({ navigation }) {
       </ScrollView>
     </View>
   );
-}
-
-const HistoricStackScreen = () => {
-  const Stack = createNativeStackNavigator();
-
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="Historique" component={Historic} />
-      <Stack.Screen name="Produit" component={Produit} />
-    </Stack.Navigator>
-  );
 };
+
+// const HistoricStackScreen = () => {
+//   const Stack = createNativeStackNavigator();
+
+//   return (
+//     <Stack.Navigator>
+//       <Stack.Screen name="Historique" component={Historic} />
+//       <Stack.Screen name="Produit" component={Produit} />
+//     </Stack.Navigator>
+//   );
+// };
 
 const styles = StyleSheet.create({
   item: { flex: 1 },
 });
 
-export default HistoricStackScreen;
+export default HistoricScreen;

@@ -36,7 +36,6 @@ const ScanScreen = ({ navigation }) => {
   //------------------------------------------------------------------
   //-- Action on bar code Scan: on scan set itemId to scanned data
   const [scanned, setScanned] = useState(false);
-  const [itemId, setItemId] = useState("");
   const [product, setProduct] = useState({
     image: "",
     name: "",
@@ -45,7 +44,6 @@ const ScanScreen = ({ navigation }) => {
   });
   const handleScannedCodeBar = async ({ type, data }) => {
     setScanned(true);
-    setItemId(data);
 
     // -- Retrieve openfoodfacts data
     try {
@@ -61,7 +59,6 @@ const ScanScreen = ({ navigation }) => {
         brand: product.brands ?? "No brand owner provided",
         score: product.ecoscore_score ?? "Missing eco score",
       });
-      console.log("product info ==> ", product);
     } catch (error) {
       console.error(error.message);
     }

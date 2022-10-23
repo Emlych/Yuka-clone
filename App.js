@@ -11,7 +11,6 @@ import HistoricScreen from "./screens/HistoricScreen";
 import RecoScreen from "./screens/RecoScreen";
 import ScanScreen from "./screens/ScanScreen";
 import SyntheseScreen from "./screens/SyntheseScreen";
-import Recherche from "./screens/Recherche";
 import Produit from "./screens/Produit";
 
 import {
@@ -31,6 +30,8 @@ export default function App() {
         <Stack.Screen name="Tab">
           {() => {
             <Tab.Navigator screenOptions={{ screenOptions }}>
+              {/* ----------------------------------------------------- */}
+              {/* Historic Tab ---------------------------------------- */}
               <Tab.Screen
                 name="TabHistoric"
                 options={{
@@ -51,7 +52,10 @@ export default function App() {
                   </Stack.Navigator>
                 )}
               </Tab.Screen>
-              {/* <Tab.Screen
+
+              {/* ------------------------------------------------------------ */}
+              {/* Recommendations Tab ---------------------------------------- */}
+              <Tab.Screen
                 options={{
                   tabBarIcon: ({ color, size }) => (
                     <MaterialCommunityIcons
@@ -64,8 +68,12 @@ export default function App() {
                 name="Recos"
                 component={RecoScreen}
               />
+
+              {/* ------------------------------------------------- */}
+              {/* Scan Tab ---------------------------------------- */}
               <Tab.Screen
                 options={{
+                  tabBarLabel: "Scan",
                   tabBarIcon: ({ color, size }) => (
                     <MaterialCommunityIcons
                       name="barcode-scan"
@@ -76,7 +84,21 @@ export default function App() {
                 }}
                 name="Scan"
                 component={ScanScreen}
-              />
+              >
+                {(props) => (
+                  <Stack.Navigator>
+                    <Stack.Screen name="Scan">
+                      {() => <ScanScreen {...props} />}
+                    </Stack.Screen>
+                    <Stack.Screen name="Produit">
+                      {() => <Produit {...props} />}
+                    </Stack.Screen>
+                  </Stack.Navigator>
+                )}
+              </Tab.Screen>
+
+              {/* ------------------------------------------------- */}
+              {/* Scan Tab ---------------------------------------- */}
               <Tab.Screen
                 options={{
                   tabBarIcon: ({ color, size }) => (
@@ -90,15 +112,6 @@ export default function App() {
                 name="Synthèse"
                 component={SyntheseScreen}
               />
-              <Tab.Screen
-                options={{
-                  tabBarIcon: ({ color, size }) => (
-                    <Ionicons name="ios-search" size={24} color={color} />
-                  ),
-                }}
-                name="Recherche"
-                component={Recherche}
-              /> */}
             </Tab.Navigator>;
           }}
         </Stack.Screen>

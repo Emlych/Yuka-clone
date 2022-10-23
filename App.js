@@ -23,12 +23,7 @@ const Tab = createBottomTabNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Tab.Navigator
-        screenOptions={{
-          tabBarActiveTintColor: "tomato",
-          tabBarInactiveTintColor: "gray",
-        }}
-      >
+      <Tab.Navigator screenOptions={{ screenOptions }}>
         <Tab.Screen
           options={{
             headerShown: false,
@@ -91,8 +86,21 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "red",
     alignItems: "center",
     justifyContent: "center",
   },
 });
+
+const screenOptions = {
+  tabBarStyle: {
+    backgroundColor: "#0000ff",
+    height: 100,
+  },
+  tabBarItemStyle: {
+    backgroundColor: "#00ff00",
+    margin: 5,
+    borderRadius: 10,
+  },
+  tabBarActiveTintColor: "tomato",
+  tabBarInactiveTintColor: "gray",
+};

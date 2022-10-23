@@ -21,7 +21,7 @@ function Historic({ navigation }) {
       }}
     >
       <ScrollView>
-        <TouchableOpacity onPress={() => navigation.navigate("Produit")}>
+        {/* <TouchableOpacity onPress={() => navigation.navigate("Produit")}>
           <Produit />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate("Produit")}>
@@ -29,7 +29,7 @@ function Historic({ navigation }) {
         </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate("Produit")}>
           <Produit />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </ScrollView>
     </View>
   );

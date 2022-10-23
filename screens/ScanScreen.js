@@ -1,13 +1,28 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, Button, SafeAreaView, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  Button,
+  SafeAreaView,
+  StyleSheet,
+  Dimensions,
+  Modal,
+  TouchableOpacity,
+} from "react-native";
 
 //Access to camera scan
 import { BarCodeScanner } from "expo-barcode-scanner";
 
-const ScanScreen = () => {
+//Components
+import ScanItem from "../components/ScanItem";
+
+//Dimensions
+const width = Dimensions.get("window").width;
+const height = Dimensions.get("window").height;
+
+const ScanScreen = ({ navigation }) => {
   //-- States for permission acess to camera + code bar scanned or not
   const [hasPermission, setHasPermission] = useState(null);
-
   const getPermission = async () => {
     const { status } = await BarCodeScanner.requestPermissionsAsync();
     setHasPermission(status === "granted");
@@ -16,13 +31,19 @@ const ScanScreen = () => {
     getPermission();
   }, []);
 
-  //-- Action on bar code Scan
+  //-- Action on bar code Scan: on scan set itemId to scanned data
   const [scanned, setScanned] = useState(false);
-
-  const handleScannedCodeBar = ({ type, data }) => {
+  const [itemId, setItemId] = useState("");
+  const handleScannedCodeBar = async ({ type, data }) => {
     setScanned(true);
-    console.log(`Code bar of type ${type} and data ${data} has been scanned`);
-    alert(`Code bar of type ${type} and data ${data} has been scanned`);
+    setItemId(data);
+
+    // -- Retrieve openfoodfacts data
+    // try {
+    //   const response = await axios
+    // } catch (error) {
+    //   console.error(error.message);
+    // }
   };
 
   if (hasPermission === null)
@@ -42,15 +63,27 @@ const ScanScreen = () => {
       ></Button>
     </SafeAreaView>;
 
-  console.log("scanned ? ", scanned);
-
   return (
     <View>
       <BarCodeScanner
         onBarCodeScanned={scanned ? undefined : handleScannedCodeBar}
+        style={{ height: height, width: width }}
       />
+
       {scanned && (
-        <Button title={"Tap to Scan Again"} onPress={() => setScanned(false)} />
+        <Modal animationType="slide">
+          <TouchableOpacity
+            onPress={() => {
+              // navigation.navigate("Produit", {
+              //   itemId: itemId,
+              // });
+            }}
+          >
+            <View style={styles.modalView}>
+              <ScanItem id={itemId} />
+            </View>
+          </TouchableOpacity>
+        </Modal>
       )}
     </View>
   );
@@ -61,5 +94,9 @@ export default ScanScreen;
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "white",
+  },
+  modalView: {
+    height: 100,
+    padding: 5,
   },
 });

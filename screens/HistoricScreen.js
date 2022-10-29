@@ -6,6 +6,7 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
+import Produit from "./Produit";
 
 const HistoricScreen = ({ navigation }) => {
   return (
@@ -17,14 +18,7 @@ const HistoricScreen = ({ navigation }) => {
       }}
     >
       <ScrollView>
-        <Text>Blablab</Text>
         {/* <TouchableOpacity onPress={() => navigation.navigate("Produit")}>
-          <Produit />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate("Produit")}>
-          <Produit />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate("Produit")}>
           <Produit />
         </TouchableOpacity> */}
       </ScrollView>

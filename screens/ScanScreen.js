@@ -9,6 +9,7 @@ import {
   Modal,
   TouchableOpacity,
 } from "react-native";
+import { Entypo } from "@expo/vector-icons";
 import axios from "axios";
 
 //Access to camera scan
@@ -22,6 +23,10 @@ const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
 const ScanScreen = ({ navigation }) => {
+  //----------------------------------------------------
+  //- Deal with open and close modal
+  const [openModal, setOpenModal] = useState(false);
+
   //------------------------------------------------------------------
   //-- States for permission acess to camera + code bar scanned or not
   const [hasPermission, setHasPermission] = useState(null);
@@ -37,7 +42,7 @@ const ScanScreen = ({ navigation }) => {
   //-- Action on bar code Scan: on scan set itemId to scanned data
   const [scanned, setScanned] = useState(false);
   const [product, setProduct] = useState({
-    image: "",
+    image: "No image provided",
     name: "",
     brand: "",
     score: 0,
@@ -50,7 +55,10 @@ const ScanScreen = ({ navigation }) => {
       const response = await axios.get(
         `https://world.openfoodfacts.org/api/v0/product/${data}.json`
       );
-      console.log("item id ==> ", data);
+
+      if (response?.data?.status_verbose == "product not found") {
+        throw new Error("Product not found");
+      }
 
       const product = response?.data?.product;
       setProduct({
@@ -59,8 +67,9 @@ const ScanScreen = ({ navigation }) => {
         brand: product.brands ?? "No brand owner provided",
         score: product.ecoscore_score ?? "Missing eco score",
       });
+      setOpenModal(true);
     } catch (error) {
-      console.error(error.message);
+      console.error(error);
     }
   };
 
@@ -94,17 +103,30 @@ const ScanScreen = ({ navigation }) => {
 
       {scanned && (
         <Modal animationType="slide">
-          <TouchableOpacity
-            onPress={() => {
-              // navigation.navigate("Produit", {
-              //   itemId: itemId,
-              // });
-            }}
-          >
-            <View style={styles.modalView}>
-              <ScanItem product={product} />
+          <SafeAreaView style={styles.modal}>
+            <View style={styles.crossContainer}>
+              <Entypo
+                name="cross"
+                style={30}
+                color="red"
+                onPress={() => {
+                  setScanned(false);
+                  setOpenModal(false);
+                }}
+              />
             </View>
-          </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate("Produit", { product: product });
+              }}
+            >
+              <Text>{product.name}</Text>
+              {/* <View style={styles.modalView}>
+              <ScanItem product={product} />
+            </View> */}
+            </TouchableOpacity>
+          </SafeAreaView>
         </Modal>
       )}
     </View>
@@ -128,8 +150,15 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "white",
   },
+  modal: { height: 150 },
   modalView: {
     height: 100,
     padding: 5,
+  },
+  crossContainer: {
+    position: "absolute",
+    justifyContent: "flex-end",
+    right: 5,
+    top: 5,
   },
 });

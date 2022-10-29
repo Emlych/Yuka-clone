@@ -16,7 +16,7 @@ const HistoricStackScreen = () => {
         component={HistoricScreen}
         options={{ headerShown: false }}
       />
-      <Stack.Screen name="Produit" component={Produit} />
+      {/* <Stack.Screen name="Produit" component={Produit} /> */}
     </Stack.Navigator>
   );
 };

@@ -1,12 +1,14 @@
 import React from "react";
 import { View, Text } from "react-native";
 
-const Produit = ({ route, navigation }) => {
-  const { itemId } = route.params;
+const Produit = ({ route }) => {
+  console.log("route ==> ", route);
+  s;
+  const { product } = route.params;
   return (
     <View>
       <Text>Produit Screen</Text>
-      <Text>itemId: {JSON.stringify(itemId)}</Text>
+      <Text>Product: {JSON.stringify(product)}</Text>
     </View>
   );
 };

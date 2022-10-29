@@ -7,7 +7,7 @@ import Produit from "./Produit";
 //Navigation
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-const ScanStackScreen = () => {
+const ScanStackScreen = ({ props }) => {
   const Stack = createNativeStackNavigator();
   return (
     <Stack.Navigator>
@@ -16,7 +16,7 @@ const ScanStackScreen = () => {
         component={ScanScreen}
         options={{ headerShown: false }}
       />
-      <ScanScreen name="Produit" component={Produit} />
+      <Stack.Screen name="Produit">{() => <Produit {...props} />}</Stack.Screen>
     </Stack.Navigator>
   );
 };
